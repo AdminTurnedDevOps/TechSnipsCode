@@ -2,14 +2,14 @@
   hosts: localhost
   connection: local
   vars:
-  AKS_resource_group: AKSTest
-  AKS_location: "East US"
-  aks_name: aksclus
-  username: aksuser
-  ssh_pub_key: "your_ssh_key"
-  client_id: "your_client_id"
-  client_secret: "your_client_secret"
-  k8s_version: "1.13.7"
+    AKS_resource_group: AKSTest
+    AKS_location: "East US"
+    aks_name: aksclus
+    username: aksuser
+    ssh_pub_key: "your_ssh_key"
+    client_id: "your_client_id"
+    client_secret: "your_client_secret"
+    k8s_version: "1.13.7"
 
   tasks:
   - name: Create resource group
