@@ -1,20 +1,31 @@
 - name: New AKS Cluster
   hosts: localhost
   connection: local
+  vars:
+  AKS_resource_group: AKSTest
+  AKS_location: "East US"
+  aks_name: aksclus
+  username: aksuser
+  ssh_pub_key: "your_ssh_key"
+  client_id: "your_client_id"
+  client_secret: "your_client_secret"
+  k8s_version: "1.13.7"
+
   tasks:
   - name: Create resource group
     azure_rm_resourcegroup:
-      name: "AKSTest"
-      location: "East US"
+      name: "{{ AKS_resource_group }}"
+      location: "{{ AKS_location }}"
+      kubernetes_version: "{{ k8s_version }}"
   - name: Create an AKS cluster
     azure_rm_aks:
-      name: "mynewcluster"
-      location: "East US"
-      resource_group: "AKSTest"
+      name: "{{ aks_name }}"
+      location: "{{ AKS_location }}"
+      resource_group: "{{ AKS_resource_group }}"
       dns_prefix: "mynewcluster"
       linux_profile:
-        admin_username: "mike"
-        ssh_key: "{{ ssh_key }}"
+        admin_username: "{{ username }}"
+        ssh_key: "{{ ssh_pub_key }}"
       service_principal:
         client_id: "{{ client_id }}"
         client_secret: "{{ client_secret }}"
